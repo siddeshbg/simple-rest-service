@@ -1,3 +1,4 @@
-from django.shortcuts import render
+from django.http.response import JsonResponse
 
-# Create your views here.
+def vowel_count(request):
+    return JsonResponse({"message": "Welcome to Vowel Count API service!"})
