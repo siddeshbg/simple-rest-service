@@ -21,3 +21,54 @@ This project code is compliant with python 3.5 and above.
 ```shell script
 pip install django
 ```
+
+### Create django project - vowel_count
+```shell script
+django-admin startproject vowel_count
+```
+
+### Create an App - api
+```shell script
+cd vowel_count
+python manage.py startapp api
+```
+
+### DB setup - mysql
+This project uses mysql as DB. But if you want use the default SQLite as DB,
+then the instructions given in this section can be skipped.
+ 
+#### Install mysql
+##### Mac
+- You can download .dmg file from https://dev.mysql.com/downloads/file/?id=479114
+and follow the instructions to complete the installation.
+- To start the database, goto system preferences -> click on mysql -> Start
+
+#### Login to mysql
+```shell script
+mysql -u root -p
+```
+#### Create database - vowel_count
+```shell script
+mysql> create database vowel_count;
+mysql> show databases;
+```
+
+#### Create a DB user - vowel_count
+```shell script
+mysql> create user vowel_counter@localhost identified by 'vowel_counter';
+
+# Grant access to DB 'vowel_count' for user 'vowel_counter'
+mysql> GRANT ALL PRIVILEGES ON vowel_count . * TO 'vowel_counter'@'localhost'; 
+```
+
+###  Apply the migrations
+```shell script
+python manage.py migrate
+```
+
+### Start Django local server
+```shell script
+python manage.py runserver 
+
+# You can access it with http://127.0.0.1:8000/
+```
