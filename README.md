@@ -53,7 +53,7 @@ mysql> create database vowel_count;
 mysql> show databases;
 ```
 
-#### Create a DB user - vowel_count
+#### Create a DB user - vowel_counter
 ```shell script
 mysql> create user vowel_counter@localhost identified by 'vowel_counter';
 
@@ -61,6 +61,19 @@ mysql> create user vowel_counter@localhost identified by 'vowel_counter';
 mysql> GRANT ALL PRIVILEGES ON vowel_count . * TO 'vowel_counter'@'localhost'; 
 ```
 
+### Update settings.py to use mysql as DB
+```shell script
+vi vowel_count/vowel_count/settings.py
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'vowel_count',
+        'USER': 'vowel_counter',
+        'PASSWORD': 'vowel_counter',
+    }
+}
+```
 ###  Apply the migrations
 ```shell script
 python manage.py migrate
