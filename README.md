@@ -15,11 +15,29 @@ If you make a GET request to this API, it will respond back
 with the number of words it has dealt so far and the word with the highest 
 number of vowels it has encountered.
 
+## Using the API service
+### To get the summary
+```shell script
+$ curl http://localhost:8000/api/vowelcount
+{"message":"Welcome to Vowel Count API service!"}
+```
+
+### To post data and get vowel count
+```shell script
+$ curl -H "Content-Type: application/json" -X POST -d '{"word":"siddesh"}' http://localhost:8000/api/vowelcount
+{"message":"The given word is siddesh!"}
+
+# To test the error message, call api without providing data
+curl -H "Content-Type: application/json" -X POST http://localhost:8000/api/vowelcount
+```
+
+
 ## Setup
 ### pip packages
 This project code is compliant with python 3.5 and above.
 ```shell script
 pip install django
+pip install djangorestframework
 ```
 
 ### Create django project - vowel_count
@@ -74,6 +92,27 @@ DATABASES = {
     }
 }
 ```
+
+### Update the 'INSTALLED_APPS' config in settings.py
+Update the 'INSTALLED_APPS' section in the settings.py with 'rest_framework' 
+and 'api' apps.
+
+```shell script
+vi vowel_count/vowel_count/settings.py
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    'rest_framework',
+    'api'
+]
+
+``` 
 ###  Apply the migrations
 ```shell script
 python manage.py migrate

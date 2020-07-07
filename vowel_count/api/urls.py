@@ -1,6 +1,9 @@
 from django.conf.urls import url
-from .views import vowel_count
+from rest_framework.routers import SimpleRouter
+from .views import VowelCountView, HistoryViewSet
 
-urlpatterns = [
-    url(r'^vowelcount', vowel_count, name="vowel_count"),
-]
+router = SimpleRouter()
+router.register("history", HistoryViewSet, basename='history')
+
+urlpatterns = router.urls + [
+    url(r'^vowelcount', VowelCountView.as_view(), name='vowelcount')]
